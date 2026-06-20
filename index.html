@@ -1,1 +1,642 @@
-.
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>It's Never Too Late · Rick Beato · Ukubona LLC</title>
+
+<meta property="og:title" content="It's Never Too Late · Rick Beato · Ukubona LLC" />
+<meta property="og:description" content="A curated guide to Rick Beato's 5-minute masterclass on reinvention — for anyone starting piano after 45. Ten timestamps. Ten reasons the ledger isn't closed." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://abikesa.github.io/logos/assets/ukubona-light.png" />
+
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-light.ico" />
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
+<link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-light.png" as="image" />
+<link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-dark.png" as="image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg0:       #0d0d0d;
+  --bg1:       #161616;
+  --bg2:       #1e1e1e;
+  --bg3:       #282828;
+  --border:    rgba(255,255,255,0.07);
+  --border-md: rgba(255,255,255,0.13);
+  --text0:     #f2f0eb;
+  --text1:     #b8b4aa;
+  --text2:     #6e6a62;
+  --accent:    #7f77dd;
+  --accent-d:  rgba(127,119,221,0.15);
+  --accent-b:  rgba(127,119,221,0.35);
+  --gold:      #c8921a;
+  --gold-d:    rgba(200,146,26,0.13);
+  --gold-b:    rgba(200,146,26,0.32);
+  --coral:     #d85a30;
+  --coral-d:   rgba(216,90,48,0.13);
+  --coral-b:   rgba(216,90,48,0.32);
+  --teal:      #1d9e75;
+  --teal-d:    rgba(29,158,117,0.13);
+  /* piano key colors */
+  --key-white: rgba(255,255,255,0.06);
+  --key-black: rgba(0,0,0,0.35);
+  --key-active:#7f77dd;
+  --serif:     'DM Serif Display', Georgia, serif;
+  --sans:      'DM Sans', system-ui, sans-serif;
+  --mono:      'DM Mono', 'Fira Mono', monospace;
+  --max:       820px;
+  --r:         8px;
+  --rl:        14px;
+}
+[data-theme="light"] {
+  --bg0:       #f5f3ee;
+  --bg1:       #ffffff;
+  --bg2:       #f0ede6;
+  --bg3:       #e8e4db;
+  --border:    rgba(0,0,0,0.07);
+  --border-md: rgba(0,0,0,0.13);
+  --text0:     #1a1916;
+  --text1:     #4a4740;
+  --text2:     #8a8680;
+  --accent:    #534ab7;
+  --accent-d:  rgba(83,74,183,0.09);
+  --accent-b:  rgba(83,74,183,0.28);
+  --gold:      #7a520a;
+  --gold-d:    rgba(122,82,10,0.09);
+  --gold-b:    rgba(122,82,10,0.26);
+  --coral:     #993c1d;
+  --coral-d:   rgba(153,60,29,0.09);
+  --coral-b:   rgba(153,60,29,0.26);
+  --key-white: rgba(0,0,0,0.04);
+  --key-black: rgba(0,0,0,0.12);
+  --key-active:#534ab7;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--sans);
+  background: var(--bg0);
+  color: var(--text0);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── NAV ── */
+.site-nav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--bg0);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s, border-color 0.3s;
+}
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.logo-wrap { width: 30px; height: 30px; flex-shrink: 0; position: relative; }
+.logo-wrap img {
+  width: 100%; height: 100%; object-fit: contain;
+  position: absolute; top: 0; left: 0;
+  transition: opacity 0.35s;
+  animation: spin 120s linear infinite;
+}
+.logo-dark  { opacity: 1; }
+.logo-light { opacity: 0; }
+[data-theme="light"] .logo-dark  { opacity: 0; }
+[data-theme="light"] .logo-light { opacity: 1; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .logo-wrap img { animation: none; } }
+
+.nav-brand { font-family: var(--serif); font-size: 0.95rem; color: var(--text0); flex: 1; }
+.nav-sub { font-family: var(--mono); font-size: 0.58rem; color: var(--text2); letter-spacing: 0.08em; margin-left: 0.4rem; }
+.theme-btn {
+  background: var(--bg2); border: 1px solid var(--border-md);
+  border-radius: 20px; padding: 0.25rem 0.75rem;
+  font-family: var(--mono); font-size: 0.62rem;
+  color: var(--text1); cursor: pointer;
+  letter-spacing: 0.05em; transition: background 0.2s, color 0.2s; flex-shrink: 0;
+}
+.theme-btn:hover { background: var(--bg3); color: var(--text0); }
+
+/* ── OUTER ── */
+.outer { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+
+/* ── HERO ── */
+.hero { padding: 3.5rem 0 2rem; }
+.eyebrow {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text2); margin-bottom: 0.85rem;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  line-height: 1.08; letter-spacing: -0.02em;
+  color: var(--text0); margin-bottom: 0.9rem;
+}
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-lede {
+  font-size: 1rem; color: var(--text1);
+  max-width: 60ch; line-height: 1.72; margin-bottom: 1.6rem;
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem;
+  font-family: var(--mono); font-size: 0.62rem;
+  color: var(--text2); letter-spacing: 0.06em;
+}
+.meta-chip {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 20px; padding: 0.2rem 0.65rem;
+}
+.meta-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+/* ── VIDEO EMBED ── */
+.video-section { padding: 0 0 2rem; }
+.video-wrap {
+  position: relative; width: 100%; padding-bottom: 56.25%;
+  border-radius: var(--rl); overflow: hidden;
+  background: #000; border: 1px solid var(--border);
+}
+.video-wrap iframe {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%; border: none;
+}
+.video-caption {
+  font-family: var(--mono); font-size: 0.62rem;
+  color: var(--text2); margin-top: 0.6rem;
+  letter-spacing: 0.05em;
+}
+.video-caption a { color: var(--accent); text-decoration: none; }
+.video-caption a:hover { text-decoration: underline; }
+
+/* ── PIANO KEY CHAPTER STRIP ── */
+.piano-strip-section { padding: 0.5rem 0 2.5rem; }
+.strip-label {
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text2); margin-bottom: 1rem;
+}
+.piano-strip {
+  display: flex; gap: 3px; align-items: stretch;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 0.6rem 0.6rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-md) transparent;
+}
+.key {
+  flex: 1; min-width: 64px; max-width: 90px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-end;
+  background: var(--key-white);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.5rem 0.3rem 0.55rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  gap: 0.35rem;
+  position: relative;
+}
+.key:hover { background: var(--accent-d); border-color: var(--accent-b); }
+.key.active { background: var(--accent-d); border-color: var(--accent); }
+.key.black-key { background: var(--key-black); border-color: rgba(255,255,255,0.1); }
+.key.black-key:hover { background: var(--accent-d); border-color: var(--accent-b); }
+.key-ts {
+  font-family: var(--mono); font-size: 0.65rem;
+  font-weight: 500; color: var(--accent);
+  letter-spacing: 0.04em;
+}
+.key-age {
+  font-family: var(--mono); font-size: 0.55rem;
+  color: var(--text2); letter-spacing: 0.04em;
+}
+.key-icon { font-size: 1rem; line-height: 1; }
+.key-num {
+  font-family: var(--mono); font-size: 0.5rem;
+  color: var(--text2);
+  position: absolute; top: 4px; right: 5px;
+}
+
+/* ── CHAPTER NOTES ── */
+.chapters-section { padding: 0 0 3rem; }
+.ch-section-head {
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text2); margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.chapter {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0;
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  overflow: hidden;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+.chapter:hover { border-color: var(--border-md); }
+.chapter.active { border-color: var(--accent); }
+.chapter.active .ch-left { background: var(--accent-d); border-right-color: var(--accent-b); }
+.ch-left {
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  padding: 1rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+.ch-num {
+  font-family: var(--mono); font-size: 0.55rem;
+  color: var(--text2); letter-spacing: 0.06em;
+}
+.ch-ts {
+  font-family: var(--mono); font-size: 0.8rem;
+  font-weight: 500; color: var(--accent);
+  letter-spacing: 0.02em;
+}
+.ch-icon { font-size: 1.1rem; line-height: 1; }
+.ch-right { padding: 1rem 1.2rem; }
+.ch-title {
+  font-family: var(--serif);
+  font-size: 1rem; font-style: italic;
+  color: var(--text0); margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+.ch-body {
+  font-size: 0.85rem; color: var(--text1);
+  line-height: 1.7; margin-bottom: 0.5rem;
+}
+.ch-piano {
+  font-family: var(--mono); font-size: 0.72rem;
+  color: var(--teal); line-height: 1.6;
+  padding: 0.5rem 0.7rem;
+  background: var(--teal-d);
+  border-radius: 5px;
+  margin-top: 0.4rem;
+}
+.ch-piano::before { content: '♪ '; }
+.ch-link {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.05em; color: var(--accent);
+  text-decoration: none; margin-top: 0.6rem;
+  padding: 0.22rem 0.55rem;
+  border: 1px solid var(--accent-b);
+  border-radius: 20px;
+  transition: background 0.15s;
+}
+.ch-link:hover { background: var(--accent-d); }
+
+/* ── CLOSING CARD ── */
+.close-card {
+  background: var(--gold-d);
+  border: 1px solid var(--gold-b);
+  border-radius: var(--rl);
+  padding: 1.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.close-head {
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.9rem;
+}
+.close-card .quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: var(--text0);
+  line-height: 1.35;
+  margin-bottom: 1rem;
+}
+.close-card p { font-size: 0.9rem; color: var(--text1); line-height: 1.72; margin-bottom: 0.6rem; }
+.close-card p:last-child { margin-bottom: 0; }
+.close-card strong { color: var(--text0); font-weight: 500; }
+
+/* ── FOOTER ── */
+footer { border-top: 1px solid var(--border); padding: 2rem 0; }
+.footer-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 1.5rem;
+  display: flex; justify-content: space-between;
+  align-items: flex-end; gap: 1rem; flex-wrap: wrap;
+}
+.footer-mark { font-family: var(--mono); font-size: 0.6rem; color: var(--text2); line-height: 1.9; letter-spacing: 0.04em; }
+.footer-mark span { color: var(--text1); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 560px) {
+  .chapter { grid-template-columns: 58px 1fr; }
+  .outer { padding: 0 1rem; }
+  .hero-title { font-size: 1.85rem; }
+  .piano-strip { gap: 2px; }
+  .key { min-width: 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <div class="logo-wrap" aria-hidden="true">
+      <img class="logo-dark"  src="https://abikesa.github.io/logos/assets/ukubona-dark.png"  alt="" />
+      <img class="logo-light" src="https://abikesa.github.io/logos/assets/ukubona-light.png" alt="" />
+    </div>
+    <div class="nav-brand">Ukubona <span class="nav-sub">· never too late</span></div>
+    <button class="theme-btn" id="theme-btn">light</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="outer">
+  <header class="hero">
+    <p class="eyebrow">Ukubona LLC · recommended viewing · for the late-starting pianist</p>
+    <h1 class="hero-title">The ledger isn't<br>closed at <em>forty-five</em>.</h1>
+    <p class="hero-lede">Rick Beato — guitarist, professor, producer, YouTube creator — maps five decades of reinvention in five minutes. If you are starting piano after 45, this is the five-minute case for why the gradient still points forward. Every timestamp below links directly to the moment that matters.</p>
+    <div class="hero-meta">
+      <span class="meta-chip"><span class="dot"></span>5 min 38 sec</span>
+      <span class="meta-chip">10 chapters</span>
+      <span class="meta-chip">Rick Beato · 1.1M views</span>
+      <span class="meta-chip">piano · reinvention · late bloom</span>
+    </div>
+  </header>
+</div>
+
+<!-- VIDEO -->
+<div class="outer">
+  <div class="video-section">
+    <div class="video-wrap" id="player-wrap">
+      <iframe
+        id="yt-player"
+        src="https://www.youtube.com/embed/y4EraezQ78I?rel=0&modestbranding=1"
+        title="It's Never Too Late (If You're Willing To Do the Work) — Rick Beato"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <p class="video-caption">
+      <a href="https://www.youtube.com/watch?v=y4EraezQ78I" target="_blank" rel="noopener">↗ Open on YouTube</a>
+      &nbsp;·&nbsp; Rick Beato &nbsp;·&nbsp; "It's Never Too Late (If You're Willing To Do the Work)"
+    </p>
+  </div>
+</div>
+
+<!-- PIANO KEY STRIP -->
+<div class="outer">
+  <div class="piano-strip-section">
+    <p class="strip-label">Ten chapters — click any key to jump</p>
+    <div class="piano-strip" id="key-strip">
+      <!-- keys injected by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER NOTES -->
+<div class="outer">
+  <div class="chapters-section">
+    <h2 class="ch-section-head">Chapter notes — annotated for the late-starting pianist</h2>
+    <div id="chapters-list">
+      <!-- chapters injected by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING CARD -->
+<div class="outer">
+  <div class="close-card">
+    <div class="close-head">For the 45-year-old at the keyboard right now</div>
+    <div class="quote">"I could start completely from scratch today at 62 and still win."</div>
+    <p>Rick Beato is not talking about talent. He is talking about the willingness to enter a new event stream — to start appending new events to a ledger that has never contained piano before, and to let the gradient do its work over time.</p>
+    <p>The neuroscience agrees with him. Adult brains retain synaptic plasticity far longer than the popular narrative allows. What adults lose in raw acquisition speed, they more than compensate with <strong>pattern recognition across domains</strong>, <strong>disciplined practice structures</strong>, and <strong>the ability to understand music theory before their fingers can execute it</strong> — a profound advantage that children do not have.</p>
+    <p>The piano is not asking whether you started at five. It is asking what you bring to the next hour of practice. That question has the same answer at 45 as it does at 14: show up, do the work, let the trajectory build.</p>
+    <p><strong>State<sub>t</sub> = Σ Event<sub>i</sub></strong> — every session is an event appended to the ledger. The only ledger that stays empty is the one you never open.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-mark">
+      <div>Ukubona LLC — <span>Twin · Operating · Ecosystem</span></div>
+      <div style="margin-top:3px;font-size:0.56rem">State<sub>t</sub> = Σ Event<sub>i</sub> · Kampala · Virginia · 2026</div>
+    </div>
+    <div class="footer-mark" style="text-align:right">
+      <div>okubonabona → kubona → ivyabona</div>
+      <div>ukubona → <span>sawubona</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────
+const chapters = [
+  {
+    n: 1,
+    ts: "0:00",
+    start: 0,
+    icon: "🎯",
+    title: "The 30-Year Myth",
+    isBlack: false,
+    body: "Rick opens by naming the belief that paralyses more adult learners than anything else: that if you didn't establish yourself by 30, the window is permanently closed. He then spends the next five minutes dismantling it with his own life.",
+    piano: "For the 45-year-old pianist: the belief that 'it's too late' is the only thing that can actually make it too late. Every other barrier is negotiable."
+  },
+  {
+    n: 2,
+    ts: "1:02",
+    start: 62,
+    icon: "🦷",
+    title: "First Guitar — Age 14, Broken Ankle",
+    isBlack: true,
+    body: "A broken ankle during summer forces him inside. He picks up a guitar. The constraint produces the beginning. He is not a prodigy discovering his instrument — he is a teenager with nowhere else to be.",
+    piano: "Constraint is often the door. The adult who finally has time, or who is recovering from something, or who just turned 45 and decided — that is the same structural moment. The ledger opens at the first practice session, not at birth."
+  },
+  {
+    n: 3,
+    ts: "1:21",
+    start: 81,
+    icon: "📜",
+    title: "Rejection → History Major → Re-audition",
+    isBlack: false,
+    body: "He fails his first music school auditions at 18 and ends up majoring in history. A year later he re-auditions and gets into Ithaca College. The rejection is not the end of the trajectory — it is a detour that still gets appended to the ledger.",
+    piano: "Adult piano learners reject themselves pre-emptively. They run the audition internally and fail it before sitting down. Beato's move: re-audition anyway. The instrument does not hold grudges."
+  },
+  {
+    n: 4,
+    ts: "1:34",
+    start: 94,
+    icon: "🎓",
+    title: "Professor at 25 — the School That Rejected Him",
+    isBlack: true,
+    body: "At 25 he returns to Ithaca College as a faculty member teaching Jazz studies — the same institution that turned him away seven years earlier. The system that rejected him eventually houses him.",
+    piano: "The piano that sounds foreign at 45 will sound familiar at 50. The gap between where you are and where you want to be is measured in hours of practice, not in years of missed childhood."
+  },
+  {
+    n: 5,
+    ts: "1:56",
+    start: 116,
+    icon: "💸",
+    title: "Quitting Stability at 30 — Going Broke",
+    isBlack: false,
+    body: "He leaves a stable teaching position at 30 for a Polygram publishing deal in New York City. The deal collapses. He goes broke. He moves back in with his parents. This is not a low point in a success story — it is the story.",
+    piano: "Starting piano at 45 with no prior training is a version of this: trading the stability of not-knowing for the exposure of beginning. The humiliation of the beginner is the tuition. It is not avoidable. It is the work."
+  },
+  {
+    n: 6,
+    ts: "3:01",
+    start: 181,
+    icon: "🎸",
+    title: "Band at 35 · Signed at 36 · Dropped at 37",
+    isBlack: true,
+    body: "He starts a band at 35, gets signed at 36, and dropped at 37. Three years of work, compressed into one sentence. The timeline is not a tragedy — it is the cost of entry into the next chapter.",
+    piano: "One year of consistent piano practice at 45 will produce something audible. Two years will produce something musical. Three years will produce something personal. The compressed timeline in retrospect always looks faster than it felt from inside."
+  },
+  {
+    n: 7,
+    ts: "3:09",
+    start: 189,
+    icon: "📚",
+    title: "Self-Taught Production — Magazines at Barnes & Noble",
+    isBlack: false,
+    body: "Getting dropped at 37 with no production skills or gear, he teaches himself audio engineering by reading magazines at Barnes & Noble. No YouTube. No online courses. Physical magazines, repeated reading, applied practice.",
+    piano: "This is the most directly applicable moment in the video for the adult learner. He is 37 with zero background in a field, learning from the available materials with no institutional support. Sound familiar? The mechanism is identical. The age is not the variable — the hours are."
+  },
+  {
+    n: 8,
+    ts: "3:34",
+    start: 214,
+    icon: "🏆",
+    title: "First Platinum Record — Age 41",
+    isBlack: true,
+    body: "Four years after teaching himself production from scratch via magazines, he earns his first platinum record as a producer. The discipline of self-teaching, applied with professional seriousness over four years, produces a professional result.",
+    piano: "Four years of serious piano study starting at 45 puts you at 49 with real musicianship. That is not a consolation prize. That is decades of playing ahead of you, at a level you could not have reached any other way."
+  },
+  {
+    n: 9,
+    ts: "3:53",
+    start: 233,
+    icon: "📹",
+    title: "YouTube at 54 — Zero Experience",
+    isBlack: false,
+    body: "At 54, with no prior experience in video editing, cameras, or social media, he launches his YouTube channel. He does not wait until he knows what he's doing. He starts, makes errors publicly, and iterates.",
+    piano: "The piano does not require you to perform publicly until you choose to. You have privacy that YouTube does not offer. You have a lower barrier to entry than he did. The only parallel that matters: he started without knowing, and so can you."
+  },
+  {
+    n: 10,
+    ts: "5:18",
+    start: 318,
+    icon: "∞",
+    title: "The Final Thesis — Still Going at 62",
+    isBlack: true,
+    body: "Now 62 with over a million followers, he states plainly: he could start from scratch again today and succeed. Not because he is exceptional, but because storytelling and hard work are not age-restricted resources. They compound. They do not decay.",
+    piano: "This is the Ukubona framing: State_t = Σ Event_i. Every practice session is an event appended to the ledger. The trajectory is the sum of all of them. At 45 you are not starting late. You are starting the sequence that, at 62, you will look back on as the obvious beginning."
+  }
+];
+
+// ── BUILD KEY STRIP ───────────────────────────────────────────
+const strip = document.getElementById('key-strip');
+chapters.forEach((ch, i) => {
+  const key = document.createElement('button');
+  key.className = 'key' + (ch.isBlack ? ' black-key' : '');
+  key.setAttribute('aria-label', 'Jump to chapter ' + ch.n + ': ' + ch.title);
+  key.dataset.start = ch.start;
+  key.dataset.idx   = i;
+  key.innerHTML = `
+    <span class="key-num">${ch.n}</span>
+    <span class="key-icon">${ch.icon}</span>
+    <span class="key-ts">${ch.ts}</span>
+  `;
+  key.addEventListener('click', () => seekTo(ch.start, i));
+  strip.appendChild(key);
+});
+
+// ── BUILD CHAPTER LIST ─────────────────────────────────────────
+const list = document.getElementById('chapters-list');
+chapters.forEach((ch, i) => {
+  const el = document.createElement('div');
+  el.className = 'chapter';
+  el.dataset.idx = i;
+  el.innerHTML = `
+    <div class="ch-left">
+      <span class="ch-num">CH ${ch.n}</span>
+      <span class="ch-icon">${ch.icon}</span>
+      <span class="ch-ts">${ch.ts}</span>
+    </div>
+    <div class="ch-right">
+      <div class="ch-title">${ch.title}</div>
+      <div class="ch-body">${ch.body}</div>
+      <div class="ch-piano">${ch.piano}</div>
+      <a class="ch-link"
+         href="https://www.youtube.com/watch?v=y4EraezQ78I&start=${ch.start}"
+         target="_blank" rel="noopener"
+         onclick="event.preventDefault(); seekTo(${ch.start}, ${i})">
+        ▶ Jump to ${ch.ts}
+      </a>
+    </div>
+  `;
+  el.addEventListener('click', (e) => {
+    if (!e.target.closest('a')) seekTo(ch.start, i);
+  });
+  list.appendChild(el);
+});
+
+// ── SEEK + HIGHLIGHT ──────────────────────────────────────────
+let currentIdx = -1;
+function seekTo(seconds, idx) {
+  // Update iframe src with start time
+  const iframe = document.getElementById('yt-player');
+  iframe.src = `https://www.youtube.com/embed/y4EraezQ78I?start=${seconds}&autoplay=1&rel=0&modestbranding=1`;
+
+  // Scroll player into view
+  document.getElementById('player-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  // Highlight key
+  document.querySelectorAll('.key').forEach((k, i) => {
+    k.classList.toggle('active', i === idx);
+  });
+  // Highlight chapter
+  document.querySelectorAll('.chapter').forEach((c, i) => {
+    c.classList.toggle('active', i === idx);
+  });
+  currentIdx = idx;
+}
+
+// ── THEME TOGGLE ──────────────────────────────────────────────
+const html = document.documentElement;
+const btn  = document.getElementById('theme-btn');
+function applyTheme(t) {
+  html.setAttribute('data-theme', t);
+  btn.textContent = t === 'dark' ? 'light' : 'dark';
+}
+btn.addEventListener('click', () => {
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  try { localStorage.setItem('ukb-beato-theme', next); } catch(e) {}
+});
+(function() {
+  let saved;
+  try { saved = localStorage.getItem('ukb-beato-theme'); } catch(e) {}
+  applyTheme(saved || 'dark');
+})();
+</script>
+
+</body>
+</html>
